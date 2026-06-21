@@ -1,26 +1,109 @@
 @import "tailwindcss";
 
+/*
+  LagreenLabs — sistema de color verde (salud).
+  Layout inspirado en ploy.ai, paleta y marca propias.
+  Lock de acento: un solo matiz (verde) en toda la página; la variación viene de la luminosidad.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f3f4f1; /* off-white cálido con leve verde */
+  --surface: #ffffff;
+  --ink: #14201a; /* casi negro con tinte verde */
+  --ink-soft: #51605a; /* texto secundario, AA sobre --bg */
+  --line: #dde1d9;
+
+  --brand: #0e7a50; /* verde emerald, acento principal (botones, links, íconos) */
+  --brand-strong: #0a5538; /* verde más profundo para texto sobre claro */
+  --forest: #0a3326; /* verde bosque, fondos oscuros / cierre */
+  --lime: #c4ec86; /* verde fresco, bloque destacado (energía como la referencia) */
+  --mint: #d8f0e2; /* verde menta pálido, superficies suaves */
+  --sage: #e7eedf; /* salvia muy claro, alternancia de tiles */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-forest: var(--forest);
+  --color-lime: var(--lime);
+  --color-mint: var(--mint);
+  --color-sage: var(--sage);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--lime);
+    color: var(--ink);
+  }
+
+  /* Compensa la nav fija al saltar con anclas (#contacto, etc.) */
+  :target {
+    scroll-margin-top: 6rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Titulares display: Anton condensado, mayúsculas, interlineado apretado */
+  .display {
+    font-family: var(--font-display), "Arial Narrow", sans-serif;
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: 0.005em;
+    font-weight: 400;
+  }
+}
+
+/* Marquee del strip de sectores (única marquesina de la página) */
+@keyframes lg-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: lg-marquee 38s linear infinite;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+/* Reduced motion: el wrapper de Motion ya degrada, esto cubre cualquier CSS */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

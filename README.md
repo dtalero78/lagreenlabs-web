@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LagreenLabs — Landing web
 
-## Getting Started
+Landing corporativa de **LagreenLabs** (automatización e IA para empresas de salud).
+Construida con la estructura visual de [ploy.ai](https://ploy.ai/features/answer-engine-optimization)
+y la marca verde de LagreenLabs, a partir del brief maestro.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router, Turbopack) — la home se genera 100% estática.
+- **Tailwind CSS v4** — tokens de marca en [`app/globals.css`](app/globals.css).
+- **Motion** (`motion/react`) — reveals al hacer scroll, con soporte de `prefers-reduced-motion`.
+- **Phosphor Icons** — iconografía.
+- Tipografías vía `next/font`: **Anton** (display) + **Geist** (texto).
+
+## Desarrollo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # build de producción
+npm run start    # sirve el build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Antes de publicar (datos reales)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Edita [`lib/site.ts`](lib/site.ts) y reemplaza los marcadores:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `whatsapp`: número en formato internacional sin `+` ni espacios (ej. Colombia `57...`).
+- `email`: correo de contacto real.
 
-## Learn More
+> El formulario de contacto no usa backend: arma un mensaje con los datos y abre
+> **WhatsApp** (`wa.me`). Es justo lo que pide el brief ("formulario y WhatsApp para
+> solicitar diagnóstico"). Si más adelante quieres guardar los leads, se puede
+> conectar a un endpoint o a una hoja de cálculo.
 
-To learn more about Next.js, take a look at the following resources:
+## Estructura del contenido
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Todo el copy vive en [`lib/content.ts`](lib/content.ts): agentes IA, problemas,
+soluciones por cliente, pasos del método y sectores. Cambiar textos no requiere
+tocar los componentes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Secciones (orden en `app/page.tsx`)
 
-## Deploy on Vercel
+1. Hero
+2. Strip de sectores
+3. Problemas que resolvemos (bloque verde 2×2)
+4. Agentes IA (8 agentes)
+5. Banner CTA oscuro
+6. Soluciones por tipo de cliente
+7. Salud y cumplimiento (diferencial normativo)
+8. Cómo trabajamos (método de 6 pasos)
+9. Cierre + formulario de diagnóstico
+10. Footer
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Escalabilidad
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+La web está pensada para crecer (como pide el brief): se pueden agregar páginas
+por agente, paquete comercial, sector o caso de uso creando rutas en `app/`.
+Posibles próximas secciones/páginas: Comercialización y tercerización de ventas,
+Telemedicina, Paquetes comerciales.
+
+## Deploy
+
+Al ser estática, despliega en cualquier hosting de Node/estático. Para
+DigitalOcean (App Platform): build `npm run build`, run `npm run start`.
+
+## Notas de diseño
+
+- Light mode por decisión de marca (la referencia ploy.ai es light). Se puede
+  añadir dark mode si se requiere.
+- La página es type-forward (sin fotografía), igual que la referencia. Si se
+  quiere más calidez/credibilidad, se pueden añadir 1-2 fotos reales (hero o
+  sección de salud).
