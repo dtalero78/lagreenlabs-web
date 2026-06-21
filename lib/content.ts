@@ -99,6 +99,8 @@ export type Segment = {
   name: string;
   promise: string;
   items: string[];
+  image: string;
+  alt: string;
 };
 
 export const SEGMENTS: Segment[] = [
@@ -113,6 +115,8 @@ export const SEGMENTS: Segment[] = [
       "Página profesional que genera contactos",
       "Cobranza básica y formatos listos",
     ],
+    image: "/images/profesional.jpg",
+    alt: "Profesional de salud organizando su consulta desde el celular en su consultorio",
   },
   {
     surface: "mint",
@@ -125,6 +129,8 @@ export const SEGMENTS: Segment[] = [
       "Cobranza y control de cartera",
       "Calidad, cumplimiento e inventario",
     ],
+    image: "/images/pyme.jpg",
+    alt: "Recepción de una clínica con el equipo atendiendo y registrando solicitudes",
   },
   {
     surface: "sage",
@@ -138,6 +144,8 @@ export const SEGMENTS: Segment[] = [
       "Conexión con tus sistemas actuales",
       "Agentes especializados y soluciones a medida",
     ],
+    image: "/images/ips.jpg",
+    alt: "Equipo de profesionales de salud en el pasillo de una institución médica moderna",
   },
 ];
 

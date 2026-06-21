@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Check, ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { SEGMENTS } from "@/lib/content";
 import { Reveal } from "../reveal";
@@ -39,31 +40,43 @@ export function Solutions() {
             <Reveal
               key={seg.name}
               delay={i * 0.06}
-              className={`rounded-[24px] p-8 lg:p-10 ${SURFACE[seg.surface]}`}
+              className={`overflow-hidden rounded-[24px] ${SURFACE[seg.surface]}`}
             >
-              {seg.badge && (
-                <span className="mb-4 inline-block rounded-full bg-ink/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-ink/70">
-                  {seg.badge}
-                </span>
-              )}
-              <h3 className="display text-[clamp(1.6rem,3.5vw,2.6rem)] text-ink">
-                {seg.name}
-              </h3>
-              <p className="mt-3 max-w-[52ch] text-lg leading-relaxed text-ink/75">
-                {seg.promise}
-              </p>
-              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                {seg.items.map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-ink/85">
-                    <Check
-                      size={20}
-                      weight="bold"
-                      className="mt-0.5 shrink-0 text-brand-strong"
-                    />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <Image
+                src={seg.image}
+                alt={seg.alt}
+                width={1200}
+                height={800}
+                className="h-48 w-full object-cover sm:h-56"
+              />
+              <div className="p-8 lg:p-10">
+                {seg.badge && (
+                  <span className="mb-4 inline-block rounded-full bg-ink/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-ink/70">
+                    {seg.badge}
+                  </span>
+                )}
+                <h3 className="display text-[clamp(1.6rem,3.5vw,2.6rem)] text-ink">
+                  {seg.name}
+                </h3>
+                <p className="mt-3 max-w-[52ch] text-lg leading-relaxed text-ink/75">
+                  {seg.promise}
+                </p>
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {seg.items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 text-ink/85"
+                    >
+                      <Check
+                        size={20}
+                        weight="bold"
+                        className="mt-0.5 shrink-0 text-brand-strong"
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </Reveal>
           ))}
         </div>
