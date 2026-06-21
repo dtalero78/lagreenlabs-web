@@ -6,6 +6,7 @@ import { Problems } from "@/components/sections/problems";
 import { Agents } from "@/components/sections/agents";
 import { DarkCta } from "@/components/sections/dark-cta";
 import { Solutions } from "@/components/sections/solutions";
+import { AutomationShowcase } from "@/components/sections/automation-showcase";
 import { Compliance } from "@/components/sections/compliance";
 import { Process } from "@/components/sections/process";
 import { ClosingContact } from "@/components/sections/closing-contact";
@@ -46,6 +47,7 @@ export default function Home() {
         <Agents />
         <DarkCta />
         <Solutions />
+        <AutomationShowcase />
         <Compliance />
         <Process />
         <ClosingContact />
